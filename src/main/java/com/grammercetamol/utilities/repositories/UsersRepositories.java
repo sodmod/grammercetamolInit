@@ -1,4 +1,4 @@
-package com.grammercetamol.repositories;
+package com.grammercetamol.utilities.repositories;
 
 import com.grammercetamol.utilities.Users;
 import org.springframework.data.jpa.repository.JpaRepository;

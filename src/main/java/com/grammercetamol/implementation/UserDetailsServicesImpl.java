@@ -1,7 +1,7 @@
 package com.grammercetamol.implementation;
 
-import com.grammercetamol.repositories.UsersRepositories;
 import com.grammercetamol.utilities.Users;
+import com.grammercetamol.utilities.repositories.UsersRepositories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

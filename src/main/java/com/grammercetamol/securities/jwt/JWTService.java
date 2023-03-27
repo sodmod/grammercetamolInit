@@ -18,9 +18,9 @@ import static io.jsonwebtoken.SignatureAlgorithm.HS512;
 
 @Component
 public class JWTService {
-    @Value("${jwt.app.secreteKey}")
+    @Value("${app.jwt.secreteKey}")
     private String secretKey;
-    @Value("${jwt.app.expiredTime}")
+    @Value("${app.jwt.expiredTime}")
     private long expireTime;
 
     public String generateToken(UserDetails userDetails) {
