@@ -1,12 +1,14 @@
 package com.grammercetamol.controllers.services;
 
 import com.grammercetamol.implementation.UserServices;
+import com.grammercetamol.payload.request.RefreshTokenRequest;
 import com.grammercetamol.payload.request.SignIn;
 import com.grammercetamol.payload.request.SignUp;
-import com.grammercetamol.payload.responses.LoginResponses;
-import com.grammercetamol.payload.responses.SignUpResponses;
+import com.grammercetamol.payload.responses.LoginResponse;
+import com.grammercetamol.payload.responses.SignUpResponse;
 import com.grammercetamol.securities.jwt.JWTService;
 import com.grammercetamol.securities.passwordEncoder.PasswordEncrypt;
+import com.grammercetamol.securities.refreshToken.RefreshTokenService;
 import com.grammercetamol.utilities.Users;
 import com.grammercetamol.utilities.repositories.UsersRepositories;
 import lombok.NonNull;
@@ -31,6 +33,8 @@ public class AuthControllerServices {
     @Autowired
     AuthenticationManager authenticationManager;
     @Autowired
+    RefreshTokenService refreshTokenService;
+    @Autowired
     JWTService jwtService;
 
     public ResponseEntity<?> signUp(@NonNull SignUp signUp) {
@@ -39,7 +43,7 @@ public class AuthControllerServices {
             return ResponseEntity
                     .badRequest()
                     .body(
-                            new SignUpResponses(
+                            new SignUpResponse(
                                     "email already exist",
                                     1
                             )
@@ -66,7 +70,7 @@ public class AuthControllerServices {
         return ResponseEntity
                 .ok()
                 .body(
-                        new SignUpResponses(
+                        new SignUpResponse(
                                 "user registered successfully",
                                 0
                         )
@@ -74,6 +78,7 @@ public class AuthControllerServices {
     }
 
     public ResponseEntity<?> login(SignIn signIn) {
+        String refreshToken;
 
         Authentication authentication =
                 authenticationManager.authenticate(
@@ -88,10 +93,15 @@ public class AuthControllerServices {
         Set<String> roles = userServices.getAuthorities()
                 .stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
 
+        refreshToken = refreshTokenService.findToken(userServices.getId());
+        if (refreshToken.isEmpty()) {
+            refreshToken = refreshTokenService.createRefreshToken(userServices.getId());
+        }
+
         return ResponseEntity
                 .ok()
                 .body(
-                        new LoginResponses(
+                        new LoginResponse(
                                 "login Successfully",
                                 0,
                                 userServices.getId(),
@@ -99,8 +109,20 @@ public class AuthControllerServices {
                                 userServices.getLastName(),
                                 userServices.getOtherName(),
                                 token,
-                                roles
+                                roles,
+                                refreshToken
                         )
+                );
+    }
+
+    public ResponseEntity<?> refreshToken(RefreshTokenRequest refreshTokenRequest) {
+
+
+        return ResponseEntity
+                .ok()
+                .body(
+                        refreshTokenService
+                                .refreshToken(refreshTokenRequest)
                 );
     }
 

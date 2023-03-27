@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Data
 @AllArgsConstructor
-public class LoginResponses extends Responses {
+public class LoginResponse extends Response {
 
     private long id;
     private String firstName;
@@ -16,8 +16,9 @@ public class LoginResponses extends Responses {
     private String type = "Bearer";
     private String token;
     private Set<String> roles;
+    private String refreshToken;
 
-    public LoginResponses(
+    public LoginResponse(
             String responseMessage,
             int responseCode,
             long id,
@@ -25,7 +26,8 @@ public class LoginResponses extends Responses {
             String lastName,
             String otherName,
             String token,
-            Set<String> roles) {
+            Set<String> roles,
+            String refreshToken) {
 
         super.setMessage(responseMessage);
         super.setMessageCode(responseCode);
@@ -35,5 +37,6 @@ public class LoginResponses extends Responses {
         this.otherName = otherName;
         this.token = token;
         this.roles = roles;
+        this.refreshToken = refreshToken;
     }
 }

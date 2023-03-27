@@ -24,16 +24,15 @@ public class JWTService {
     private long expireTime;
 
     public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+        String details = userDetails.getUsername();
+        return generateToken(new HashMap<>(), details);
     }
 
-    public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
-        System.out.println(expireTime);
-        System.out.println(new Date().getTime() + expireTime);
+    public String generateToken(Map<String, Object> extraClaims, String userDetails) {
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
-                .setSubject(userDetails.getUsername())
+                .setSubject(userDetails)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + expireTime))
                 .signWith(getSingInKey(), HS512)

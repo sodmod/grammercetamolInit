@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public abstract class Responses {
+public abstract class Response {
     private String message;
     private int messageCode;
 
