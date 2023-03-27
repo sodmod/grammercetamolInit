@@ -1,12 +1,14 @@
 package com.grammercetamol.controllers.services;
 
 import com.grammercetamol.implementation.UserServices;
+import com.grammercetamol.payload.request.RefreshTokenRequest;
 import com.grammercetamol.payload.request.SignIn;
 import com.grammercetamol.payload.request.SignUp;
 import com.grammercetamol.payload.responses.LoginResponses;
 import com.grammercetamol.payload.responses.SignUpResponses;
 import com.grammercetamol.securities.jwt.JWTService;
 import com.grammercetamol.securities.passwordEncoder.PasswordEncrypt;
+import com.grammercetamol.securities.refreshToken.RefreshTokenService;
 import com.grammercetamol.utilities.Users;
 import com.grammercetamol.utilities.repositories.UsersRepositories;
 import lombok.NonNull;
@@ -30,6 +32,8 @@ public class AuthControllerServices {
     PasswordEncrypt passwordEncrypt;
     @Autowired
     AuthenticationManager authenticationManager;
+    @Autowired
+    RefreshTokenService refreshTokenService;
     @Autowired
     JWTService jwtService;
 
@@ -88,6 +92,8 @@ public class AuthControllerServices {
         Set<String> roles = userServices.getAuthorities()
                 .stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
 
+        String refreshToken = refreshTokenService.createRefreshToken(userServices.getId());
+
         return ResponseEntity
                 .ok()
                 .body(
@@ -99,9 +105,15 @@ public class AuthControllerServices {
                                 userServices.getLastName(),
                                 userServices.getOtherName(),
                                 token,
-                                roles
+                                roles,
+                                refreshToken
                         )
                 );
+    }
+
+    public ResponseEntity<?> refreshToken(RefreshTokenRequest refreshTokenRequest) {
+
+        return null;
     }
 
 }
