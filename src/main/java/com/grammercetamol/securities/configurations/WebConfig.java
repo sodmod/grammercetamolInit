@@ -69,10 +69,10 @@ public class WebConfig {
                 .sessionCreationPolicy(NEVER);
         http
                 .authorizeRequests()
-                .antMatchers("/api/auth/**")
+                .antMatchers("/api/auth/signIn", "/api/auth/login", "/api/auth/refreshToken")
                 .permitAll()
-//                .antMatchers("")
-//                .permitAll()
+                .antMatchers("/api/secured/**")
+                .permitAll()
                 .anyRequest()
                 .authenticated();
         http
