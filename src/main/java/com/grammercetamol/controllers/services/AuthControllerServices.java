@@ -21,8 +21,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -93,11 +91,11 @@ public class AuthControllerServices {
         Set<String> roles = userServices.getAuthorities()
                 .stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
 
-        Map<String, Object> rowMap = new HashMap<>();
-        rowMap.put("roles", roles);
+//        Map<String, Object> rowMap = new HashMap<>();
+//        rowMap.put("roles", roles);
 
-        String token = jwtService.generateToken(rowMap, userServices.getUsername());
-
+//        String token = jwtService.generateToken(rowMap, userServices.getUsername());
+        String token = jwtService.generateToken(userServices);
 
         refreshToken = refreshTokenService.findToken(userServices.getId());
         if (refreshToken == null) {

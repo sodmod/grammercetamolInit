@@ -13,7 +13,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -56,13 +59,24 @@ public class RefreshTokenService {
         validate_token(token);
 
         Set<Permissions> permissionsSet = new HashSet<>(Enum.valueOf(Roles.class, token.getUsers().getRole()).permissions());
-        Set<String> permit = permissionsSet.stream().map(Permissions::getPermissions).collect(Collectors.toSet());
+        Set<String> permissions = permissionsSet.stream().map(Permissions::getPermissions).collect(Collectors.toSet());
 
-        Map<String, Object> roles = new HashMap<>();
-        roles.put("roles", permit);
+//        Map<String, Object> roles = new HashMap<>();
+//        roles.put("roles", permit);
 
-        String jwt = jwtService.generateToken(roles, token.getUsers().getEmail());
-        return new RefreshTokenResponse(token.getToken(), jwt);
+//        String jwt = jwtService.generateToken(roles, token.getUsers().getEmail());
+
+        String jwt = jwtService.generateToken(new HashMap<>(), token.getUsers().getEmail());
+
+        return new RefreshTokenResponse(
+                token.getUsers().getId(),
+                token.getUsers().getFirstName(),
+                token.getUsers().getLastName(),
+                token.getUsers().getOtherName(),
+                jwt,
+                permissions,
+                token.getToken()
+        );
     }
 
     private RefreshToken extractToken(String token) {
