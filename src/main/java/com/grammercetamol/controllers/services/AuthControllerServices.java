@@ -82,7 +82,7 @@ public class AuthControllerServices {
 
         Authentication authentication =
                 authenticationManager.authenticate(
-                        new UsernamePasswordAuthenticationToken(signIn.getEmail(), signIn.getPassword()));
+                        new UsernamePasswordAuthenticationToken(signIn.getUsername(), signIn.getPassword()));
         SecurityContextHolder
                 .getContext()
                 .setAuthentication(authentication);
