@@ -77,7 +77,7 @@ public class AuthControllerServices {
                 );
     }
 
-    public ResponseEntity<?> login(SignIn signIn) {
+    public ResponseEntity<?> login(@NonNull SignIn signIn) {
         String refreshToken;
 
         Authentication authentication =
@@ -98,6 +98,7 @@ public class AuthControllerServices {
         String token = jwtService.generateToken(userServices);
 
         refreshToken = refreshTokenService.findToken(userServices.getId());
+
         if (refreshToken == null) {
             refreshToken = refreshTokenService.createRefreshToken(userServices.getId());
         }
@@ -119,7 +120,7 @@ public class AuthControllerServices {
                 );
     }
 
-    public ResponseEntity<?> refreshToken(RefreshTokenRequest refreshTokenRequest) {
+    public ResponseEntity<?> refreshToken(@NonNull RefreshTokenRequest refreshTokenRequest) {
 
 
         return ResponseEntity

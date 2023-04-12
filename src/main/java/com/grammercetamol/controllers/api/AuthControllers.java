@@ -4,6 +4,7 @@ import com.grammercetamol.controllers.services.AuthControllerServices;
 import com.grammercetamol.payload.request.RefreshTokenRequest;
 import com.grammercetamol.payload.request.SignIn;
 import com.grammercetamol.payload.request.SignUp;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -18,7 +19,7 @@ public class AuthControllers {
     AuthControllerServices authControllerServices;
 
     @PostMapping(value = "/signIn")
-    ResponseEntity<?> signup(@Validated @RequestBody SignUp signUp) {
+    ResponseEntity<?> signup(@Validated @RequestBody @NonNull SignUp signUp) {
         return authControllerServices.signUp(signUp);
     }
 

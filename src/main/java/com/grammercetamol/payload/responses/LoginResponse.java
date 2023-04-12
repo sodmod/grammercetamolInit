@@ -17,6 +17,7 @@ public class LoginResponse extends Response {
     private String token;
     private Set<String> roles;
     private String refreshToken;
+    private boolean loggedIn = true;
 
     public LoginResponse(
             String responseMessage,
