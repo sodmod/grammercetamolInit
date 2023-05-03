@@ -1,4 +1,4 @@
-package com.grammercetamol.controllers.api;
+package com.grammercetamol.controllers.api.secure;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;

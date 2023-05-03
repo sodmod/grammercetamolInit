@@ -2,8 +2,8 @@ package com.grammercetamol.controllers.api;
 
 import com.grammercetamol.controllers.services.AuthControllerServices;
 import com.grammercetamol.payload.request.RefreshTokenRequest;
-import com.grammercetamol.payload.request.SignIn;
-import com.grammercetamol.payload.request.SignUp;
+import com.grammercetamol.payload.request.SignInDTO;
+import com.grammercetamol.payload.request.SignUpDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -18,13 +18,13 @@ public class AuthControllers {
     AuthControllerServices authControllerServices;
 
     @PostMapping(value = "/signIn")
-    ResponseEntity<?> signup(@Validated @RequestBody SignUp signUp) {
-        return authControllerServices.signUp(signUp);
+    ResponseEntity<?> signup(@Validated @RequestBody SignUpDTO signUpDTO) {
+        return authControllerServices.signUp(signUpDTO);
     }
 
     @PostMapping(value = "/login")
-    ResponseEntity<?> login(@Validated @RequestBody SignIn signIn) {
-        return authControllerServices.login(signIn);
+    ResponseEntity<?> login(@Validated @RequestBody SignInDTO signInDTO) {
+        return authControllerServices.login(signInDTO);
     }
 
     @PostMapping(value = "/refreshToken")

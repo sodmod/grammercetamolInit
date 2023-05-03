@@ -2,8 +2,8 @@ package com.grammercetamol.controllers.services;
 
 import com.grammercetamol.implementation.UserServices;
 import com.grammercetamol.payload.request.RefreshTokenRequest;
-import com.grammercetamol.payload.request.SignIn;
-import com.grammercetamol.payload.request.SignUp;
+import com.grammercetamol.payload.request.SignInDTO;
+import com.grammercetamol.payload.request.SignUpDTO;
 import com.grammercetamol.payload.responses.LoginResponse;
 import com.grammercetamol.payload.responses.SignUpResponse;
 import com.grammercetamol.securities.jwt.JWTService;
@@ -37,9 +37,9 @@ public class AuthControllerServices {
     @Autowired
     JWTService jwtService;
 
-    public ResponseEntity<?> signUp(@NonNull SignUp signUp) {
+    public ResponseEntity<?> signUp(@NonNull SignUpDTO signUpDTO) {
 
-        if (usersRepositories.existsByEmail(signUp.getEmail())) {
+        if (usersRepositories.existsByEmail(signUpDTO.getEmail())) {
             return ResponseEntity
                     .badRequest()
                     .body(
@@ -51,17 +51,17 @@ public class AuthControllerServices {
         }
 
         Users users = new Users(
-                signUp.getFirstname(),
-                signUp.getLastname(),
-                signUp.getOthername(),
-                signUp.getEmail(),
-                signUp.getPhoneNumber(),
+                signUpDTO.getFirstname(),
+                signUpDTO.getLastname(),
+                signUpDTO.getOthername(),
+                signUpDTO.getEmail(),
+                signUpDTO.getPhoneNumber(),
                 passwordEncrypt
                         .bCryptPasswordEncoder()
                         .encode(
-                                signUp.getPassword()
+                                signUpDTO.getPassword()
                         ),
-                signUp.getRole()
+                signUpDTO.getRole()
         );
 
         usersRepositories.save(users);
@@ -77,12 +77,12 @@ public class AuthControllerServices {
                 );
     }
 
-    public ResponseEntity<?> login(SignIn signIn) {
+    public ResponseEntity<?> login(SignInDTO signInDTO) {
         String refreshToken;
 
         Authentication authentication =
                 authenticationManager.authenticate(
-                        new UsernamePasswordAuthenticationToken(signIn.getUsername(), signIn.getPassword()));
+                        new UsernamePasswordAuthenticationToken(signInDTO.getUsername(), signInDTO.getPassword()));
         SecurityContextHolder
                 .getContext()
                 .setAuthentication(authentication);

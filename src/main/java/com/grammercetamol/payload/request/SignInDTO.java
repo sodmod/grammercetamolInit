@@ -3,7 +3,7 @@ package com.grammercetamol.payload.request;
 import lombok.Data;
 
 @Data
-public class SignIn {
+public class SignInDTO {
     private String username;
     private String password;
 }
