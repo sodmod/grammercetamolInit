@@ -73,6 +73,8 @@ public class WebConfig {
                 .permitAll()
                 .antMatchers("/api/secured/**")
                 .permitAll()
+                .antMatchers("/api/cloudinary/upload")
+                .permitAll()
                 .anyRequest()
                 .authenticated();
         http
