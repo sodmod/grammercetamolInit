@@ -92,7 +92,6 @@ public class RefreshTokenService {
         return refreshToken;
     }
 
-
     private boolean validate_token(RefreshToken refreshToken) {
         if (refreshToken.getExpireDate().compareTo(Instant.now()) < 0) {
             refreshTokenRepo.delete(refreshToken);

@@ -3,7 +3,7 @@ package com.grammercetamol.payload.request;
 import lombok.Data;
 
 @Data
-public class SignUp {
+public class SignUpDTO {
     private String firstname;
     private String lastname;
     private String othername;
