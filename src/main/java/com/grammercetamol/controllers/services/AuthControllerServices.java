@@ -2,8 +2,8 @@ package com.grammercetamol.controllers.services;
 
 import com.grammercetamol.implementation.UserServices;
 import com.grammercetamol.payload.request.RefreshTokenRequest;
-import com.grammercetamol.payload.request.SignIn;
-import com.grammercetamol.payload.request.SignUp;
+import com.grammercetamol.payload.request.SignInDTO;
+import com.grammercetamol.payload.request.SignUpDTO;
 import com.grammercetamol.payload.responses.LoginResponse;
 import com.grammercetamol.payload.responses.SignUpResponse;
 import com.grammercetamol.securities.jwt.JWTService;
@@ -11,7 +11,6 @@ import com.grammercetamol.securities.passwordEncoder.PasswordEncrypt;
 import com.grammercetamol.securities.refreshToken.RefreshTokenService;
 import com.grammercetamol.utilities.Users;
 import com.grammercetamol.utilities.repositories.UsersRepositories;
-import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -37,7 +36,7 @@ public class AuthControllerServices {
     @Autowired
     JWTService jwtService;
 
-    public ResponseEntity<?> signUp(@NonNull SignUp signUp) {
+    public ResponseEntity<?> signUp(SignUpDTO signUp) {
 
         if (usersRepositories.existsByEmail(signUp.getEmail())) {
             return ResponseEntity
@@ -77,7 +76,7 @@ public class AuthControllerServices {
                 );
     }
 
-    public ResponseEntity<?> login(SignIn signIn) {
+    public ResponseEntity<?> login(SignInDTO signIn) {
         String refreshToken;
 
         Authentication authentication =
