@@ -28,6 +28,13 @@ import static org.springframework.security.config.http.SessionCreationPolicy.NEV
 )
 @AllArgsConstructor
 public class WebConfig {
+    private static final String[] AUTH_WHITELIST = {
+            "/api/v1/auth/**",
+            "/v3/api-docs/**",
+            "/v3/api-docs.yaml",
+            "/swagger-ui/**",
+            "/swagger-ui.html"
+    };
     @Autowired
     private UserDetailsServicesImpl userDetailsServices;
     @Autowired
@@ -69,12 +76,10 @@ public class WebConfig {
                 .sessionCreationPolicy(NEVER);
         http
                 .authorizeRequests()
-                .antMatchers("/api/auth/**")
-                .permitAll()
-                .antMatchers("/api/secured/**")
-                .permitAll()
-                .antMatchers("/api/cloudinary/upload")
-                .permitAll()
+                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/secured/**").permitAll()
+                .antMatchers("/api/cloudinary/upload").permitAll()
+                .antMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest()
                 .authenticated();
         http
@@ -88,5 +93,4 @@ public class WebConfig {
 
         return http.build();
     }
-
 }
