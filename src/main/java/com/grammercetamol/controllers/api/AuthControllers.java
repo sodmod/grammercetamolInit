@@ -4,7 +4,7 @@ import com.grammercetamol.controllers.services.AuthControllerServices;
 import com.grammercetamol.payload.request.RefreshTokenRequest;
 import com.grammercetamol.payload.request.SignInDTO;
 import com.grammercetamol.payload.request.SignUpDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("api/auth")
+@RequiredArgsConstructor
 public class AuthControllers {
-
-    @Autowired
-    AuthControllerServices authControllerServices;
+    private final AuthControllerServices authControllerServices;
 
     @PostMapping(value = "/signIn")
     ResponseEntity<?> signup(@Validated @RequestBody SignUpDTO signUpDTO) {

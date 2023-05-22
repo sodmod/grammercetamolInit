@@ -48,7 +48,12 @@ public class CourseControllerService {
                 if ((res.get("public_id") == "" || res.get("public_id") == null) && (res.get("url") == "" || res.get("url") == null)) {
                     return ResponseEntity.noContent().build();
                 }
-                Videos videos = videosRepository.save(new Videos(res.get("public_id").toString(), res.get("url").toString()));
+                Videos videos =
+                        videosRepository.save(
+                                new Videos(
+                                        res.get("public_id").toString(),
+                                        res.get("url").toString()
+                                ));
                 videosArrayList.add(videos);
             }
             Authors authors = authorRepository.findByMail(coursesUploadDTO.getAuthorMail());
@@ -64,7 +69,12 @@ public class CourseControllerService {
                 Videos videos = videosRepository.save(new Videos(res.get("public_id").toString(), res.get("url").toString()));
                 videosArrayList.add(videos);
             }
-            Authors authors = authorRepository.save(new Authors(coursesUploadDTO.getAuthorName(), coursesUploadDTO.getAuthorMail()));
+            Authors authors = authorRepository.save(
+                    new Authors(
+                            coursesUploadDTO.getAuthorName(),
+                            coursesUploadDTO.getAuthorMail()
+                    )
+            );
             Courses courses =
                     new Courses(
                             coursesUploadDTO.getCourseName(),
