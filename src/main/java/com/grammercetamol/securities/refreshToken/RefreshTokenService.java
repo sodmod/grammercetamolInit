@@ -8,7 +8,7 @@ import com.grammercetamol.utilities.Permissions;
 import com.grammercetamol.utilities.Roles;
 import com.grammercetamol.utilities.Users;
 import com.grammercetamol.utilities.repositories.UsersRepositories;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +20,11 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class RefreshTokenService {
-    @Autowired
-    private UsersRepositories usersRepositories;
-    @Autowired
-    private RefreshTokenRepo refreshTokenRepo;
-    @Autowired
-    private JWTService jwtService;
+    private final UsersRepositories usersRepositories;
+    private final RefreshTokenRepo refreshTokenRepo;
+    private final JWTService jwtService;
     @Value("${app.refreshToken.expiredTime}")
     private Long refreshTokenExpired;
 

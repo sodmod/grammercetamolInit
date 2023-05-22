@@ -6,7 +6,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
@@ -16,7 +16,7 @@ import java.util.function.Function;
 
 import static io.jsonwebtoken.SignatureAlgorithm.HS512;
 
-@Component
+@Service
 public class JWTService {
     @Value("${app.jwt.secreteKey}")
     private String secretKey;

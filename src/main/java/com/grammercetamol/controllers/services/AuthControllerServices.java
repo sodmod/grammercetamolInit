@@ -11,7 +11,7 @@ import com.grammercetamol.securities.passwordEncoder.PasswordEncrypt;
 import com.grammercetamol.securities.refreshToken.RefreshTokenService;
 import com.grammercetamol.utilities.Users;
 import com.grammercetamol.utilities.repositories.UsersRepositories;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,17 +24,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class AuthControllerServices {
-    @Autowired
-    UsersRepositories usersRepositories;
-    @Autowired
-    PasswordEncrypt passwordEncrypt;
-    @Autowired
-    AuthenticationManager authenticationManager;
-    @Autowired
-    RefreshTokenService refreshTokenService;
-    @Autowired
-    JWTService jwtService;
+
+    private final UsersRepositories usersRepositories;
+    private final PasswordEncrypt passwordEncrypt;
+    private final AuthenticationManager authenticationManager;
+    private final RefreshTokenService refreshTokenService;
+    private final JWTService jwtService;
 
     public ResponseEntity<?> signUp(SignUpDTO signUp) {
 
