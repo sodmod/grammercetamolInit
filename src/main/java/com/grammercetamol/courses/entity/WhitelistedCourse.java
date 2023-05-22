@@ -1,14 +1,18 @@
-package com.grammercetamol.courses;
+package com.grammercetamol.courses.entity;
 
 import com.grammercetamol.utilities.Users;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @Table
 public class WhitelistedCourse {

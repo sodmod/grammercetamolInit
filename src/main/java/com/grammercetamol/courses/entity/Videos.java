@@ -1,7 +1,9 @@
-package com.grammercetamol.courses;
+package com.grammercetamol.courses.entity;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -10,7 +12,9 @@ import static javax.persistence.GenerationType.AUTO;
 @Table
 @Entity
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 public class Videos {
     @Id
     @GeneratedValue(strategy = AUTO)

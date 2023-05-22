@@ -1,14 +1,17 @@
 package com.grammercetamol.utilities;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
@@ -53,7 +56,6 @@ public class Users {
             nullable = false
     )
     private String role;
-
 
     public Users(String firstName, String lastName, String otherName, String email, String phoneNumber, String password, String role) {
         this.firstName = firstName;

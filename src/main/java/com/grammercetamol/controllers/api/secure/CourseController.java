@@ -1,7 +1,7 @@
 package com.grammercetamol.controllers.api.secure;
 
 import com.grammercetamol.controllers.services.CourseControllerService;
-import com.grammercetamol.courses.WhitelistedCourse;
+import com.grammercetamol.courses.entity.WhitelistedCourse;
 import com.grammercetamol.payload.request.CoursesUploadDTO;
 import com.grammercetamol.payload.request.WhitelistDTO;
 import lombok.NonNull;

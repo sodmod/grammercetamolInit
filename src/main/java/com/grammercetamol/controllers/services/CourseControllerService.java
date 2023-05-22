@@ -1,10 +1,10 @@
 package com.grammercetamol.controllers.services;
 
-import com.grammercetamol.courses.Authors;
-import com.grammercetamol.courses.Courses;
-import com.grammercetamol.courses.Videos;
-import com.grammercetamol.courses.WhitelistedCourse;
 import com.grammercetamol.courses.cloudinary.CloudinaryService;
+import com.grammercetamol.courses.entity.Authors;
+import com.grammercetamol.courses.entity.Courses;
+import com.grammercetamol.courses.entity.Videos;
+import com.grammercetamol.courses.entity.WhitelistedCourse;
 import com.grammercetamol.courses.repository.AuthorRepository;
 import com.grammercetamol.courses.repository.CoursesRepository;
 import com.grammercetamol.courses.repository.VideosRepository;

@@ -1,6 +1,6 @@
 package com.grammercetamol.courses.repository;
 
-import com.grammercetamol.courses.Authors;
+import com.grammercetamol.courses.entity.Authors;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
