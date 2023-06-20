@@ -18,7 +18,7 @@ import static javax.persistence.GenerationType.AUTO;
 public class Videos {
     @Id
     @GeneratedValue(strategy = AUTO)
-    private Long id;
+    private long id;
     @Column(nullable = false)
     private String publicId;
     @Column(nullable = false)

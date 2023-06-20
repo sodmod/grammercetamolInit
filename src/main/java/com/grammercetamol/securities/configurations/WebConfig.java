@@ -78,7 +78,7 @@ public class WebConfig {
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/secured/**").permitAll()
-                .antMatchers("/api/cloudinary/upload").permitAll()
+                .antMatchers("/api/cloudinary/**").permitAll()
                 .antMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest()
                 .authenticated();

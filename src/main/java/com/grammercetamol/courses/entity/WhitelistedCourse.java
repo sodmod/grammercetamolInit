@@ -17,7 +17,7 @@ import java.util.List;
 @Table
 public class WhitelistedCourse {
     @Id
-    private Long id;
+    private long id;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users users;

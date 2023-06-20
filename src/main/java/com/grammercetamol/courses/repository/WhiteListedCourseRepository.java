@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface WhiteListedCourseRepository extends JpaRepository<WhitelistedCourse, Long> {
-    List<WhitelistedCourse> findByUsers(Users users);
+    List<WhitelistedCourse> findAllByUsers(Users users);
 
     WhitelistedCourse findByCourses(Courses courses);
 }

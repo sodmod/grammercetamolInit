@@ -57,7 +57,7 @@ public class AuthControllerServices {
                         .encode(
                                 signUp.getPassword()
                         ),
-                signUp.getRole()
+                signUp.getRole().toUpperCase()
         );
 
         usersRepositories.save(users);

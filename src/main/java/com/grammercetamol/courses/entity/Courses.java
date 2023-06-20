@@ -7,6 +7,9 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.UUID;
+
+import static javax.persistence.GenerationType.AUTO;
 
 @NoArgsConstructor
 @Getter
@@ -16,10 +19,16 @@ import java.util.List;
 @Table
 public class Courses {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
+    @GeneratedValue(strategy = AUTO)
+    private long Id;
     @Column(nullable = false, name = "course_name")
     private String courseName;
+    @Column(
+            nullable = false,
+            name = "course_id",
+            unique = true
+    )
+    private String courseId;
     @ManyToOne
     @JoinColumn(name = "authors_id")
     private Authors authors;
@@ -31,5 +40,6 @@ public class Courses {
         this.courseName = courseName;
         this.authors = authors;
         this.videos = videos;
+        this.courseId = UUID.randomUUID().toString();
     }
 }

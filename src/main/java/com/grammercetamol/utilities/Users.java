@@ -19,7 +19,7 @@ public class Users {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private Long id;
+    private long id;
     @Column(
             name = "firstname",
             nullable = false

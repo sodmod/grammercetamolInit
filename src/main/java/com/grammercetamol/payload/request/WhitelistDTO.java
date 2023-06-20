@@ -1,9 +1,9 @@
 package com.grammercetamol.payload.request;
 
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 public class WhitelistDTO {
-    private Long courseID;
+    private String courseID;
     private String email;
 }

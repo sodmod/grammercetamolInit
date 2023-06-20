@@ -3,6 +3,7 @@ package com.grammercetamol.controller_advice;
 import com.grammercetamol.exceptions.CourseException;
 import com.grammercetamol.exceptions.CourseUploadException;
 import com.grammercetamol.exceptions.TokenRefreshException;
+import com.grammercetamol.exceptions.UsersException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -14,6 +15,14 @@ import static org.springframework.http.HttpStatus.*;
 
 @RestControllerAdvice
 public class ControllerAdvice {
+    @ExceptionHandler(value = UsersException.class)
+    @ResponseStatus(NOT_FOUND)
+    public ErrorMessage userNotFound(UsersException ex) {
+        return new ErrorMessage(
+                NOT_FOUND.value(),
+                ex.getMessage()
+        );
+    }
 
     @ExceptionHandler(value = TokenRefreshException.class)
     @ResponseStatus(NOT_FOUND)
@@ -28,7 +37,7 @@ public class ControllerAdvice {
 
     @ExceptionHandler(value = CourseUploadException.class)
     @ResponseStatus(NO_CONTENT)
-    public ErrorMessage cloudinaryErrorMessage(CourseUploadException ex, WebRequest request) {
+    public ErrorMessage cloudinaryErrorMessage(CourseUploadException ex) {
         return new ErrorMessage(
                 NO_CONTENT.value(),
                 ex.getMessage(),
@@ -38,7 +47,7 @@ public class ControllerAdvice {
 
     @ExceptionHandler(value = CourseException.class)
     @ResponseStatus(NOT_FOUND)
-    public ErrorMessage courseNotFound(CourseException ex, WebRequest request) {
+    public ErrorMessage courseNotFound(CourseException ex) {
         return new ErrorMessage(
                 FORBIDDEN.value(),
                 ex.getMessage(),
